@@ -5,6 +5,6 @@ Our web app bridges the gap between farmers and dealers, facilitating direct sal
 
 Brief:-
 
-views - contains all the frontend code files in .ejs format
-server.js - entire backend code written in js
-package.json - dependencies
+views - contains all the frontend code files in .ejs format,__
+server.js - entire backend code written in js,___
+package.json - dependencies__
