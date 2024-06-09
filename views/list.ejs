@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your page description">
+    <meta name="keywords" content="HTML, CSS, JavaScript, Boilerplate">
+    <meta name="author" content="Your Name">
+    <title>list PAGE </title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Link to your favicon -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-green-100">
+
+    <header class="bg-green-900 p-3 w-full">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="text-white text-xl font-bold">AgriConnect</a>
+            <div class="lg:hidden">
+                <button id="menuButton" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+            <nav id="navMenu" class="hidden lg:flex space-x-4">
+                <a href="/home" class="text-white hover:text-gray-300">Home</a>
+                <!-- <a href="dealer.html" class="text-white hover:text-gray-300">Go back</a> -->
+            </nav>
+            <form class="relative hidden lg:block">
+                <input type="search" id="headerSearch" class="form-control form-control-dark text-bg-dark"
+                    placeholder="Search..." aria-label="Search">
+            </form>
+        </div>
+    </header>
+
+    <div id="mobileMenu"
+        class="hidden absolute top-16 right-4 bg-green-700 text-white p-4 rounded-md bg-opacity-90 shadow-lg lg:hidden">
+        <nav class="flex flex-col space-y-2">
+            <a href="/home" class="text-white hover:text-gray-300">Home</a>
+            <!-- <a href="dealer.html" class="text-white hover:text-gray-300">Go back</a> -->
+        </nav>
+        <form class="relative mt-4">
+            <input type="search" id="headerSearch" class="form-control form-control-dark text-bg-dark"
+                placeholder="Search..." aria-label="Search">
+        </form>
+    </div>
+
+    <div class="container mx-auto mt-5">
+        <table class="min-w-full bg-white divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Request
+                        ID</th>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status
+                    </th>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Farmer ID
+                    </th>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                <% data.forEach(request=> { %>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <%= request.request_id %>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <%= request.status %>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <%= request.farmer_id %>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <form action="/approval" method="POST">
+                                <input type="hidden" name="request_id" value="<%= request.request_id %>">
+                                <button type="submit"
+                                    class="inline-block bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Verify</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com
+    <script src=" https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Toggle filter menu visibility
+            document.getElementById('filterButton').addEventListener('click', () => {
+                const filterMenu = document.getElementById('filterMenu');
+                filterMenu.classList.toggle('hidden');
+            });
+
+            // Mobile menu toggle
+            document.getElementById('menuButton').addEventListener('click', () => {
+                const mobileMenu = document.getElementById('mobileMenu');
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Redirect on commit button click
+            document.querySelectorAll('.commit-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    window.location.href = 'transport.html'; // Replace with your desired URL
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>request Form</title>
+    <!-- Bootstrap CSS removed -->
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-green-100">
+
+    <header class="bg-green-900 p-3 w-full">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="text-white text-xl font-bold">AgriConnect</a>
+            <div class="lg:hidden">
+                <button id="menuButton" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+            <nav id="navMenu" class="hidden lg:flex space-x-4">
+                <a href="/home" class="btn btn-outline-light me-2">Home</a>
+                <!-- <a href="farmer" class="text-white hover:text-gray-300">Go back</a> -->
+                <a href="/login" class="btn btn-outline-light me-2">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <div id="mobileMenu"
+        class="hidden absolute top-16 right-4 bg-green-700 text-white p-4 rounded-md bg-opacity-90 shadow-lg lg:hidden">
+        <nav class="flex flex-col space-y-2">
+            <a href="/home" class="btn btn-outline-light me-2">Home</a>
+            <!-- <a href="farmer" class="text-white hover:text-gray-300">Go back</a> -->
+            <a href="/login" class="btn btn-outline-light me-2">Logout</a>
+        </nav>
+    </div>
+
+    <div class="container mt-5 min-h-screen flex justify-center items-center">
+        <main class="bg-gray-100 rounded-lg shadow-md p-8 w-full md:w-1/2 lg:w-1/3 ml-4">
+            <section>
+                <h1 class="text-2xl font-bold flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-align-justify mr-2">
+                        <line x1="21" y1="10" x2="3" y2="10" />
+                        <line x1="21" y1="6" x2="3" y2="6" />
+                        <line x1="21" y1="14" x2="3" y2="14" />
+                        <line x1="21" y1="18" x2="3" y2="18" />
+                    </svg>
+                    Request an order
+                </h1>
+                <p>Fill out the details below</p>
+
+                <form id="createOrderForm" action="submitplace" method="POST" class="space-y-4">
+                    <!-- Include a hidden input field to send the dealer ID -->
+                    <input type="hidden" name="Request ID" value="<%= data.intent_id %>">
+
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700">Intend ID</label>
+                        <input type="text" class="form-input mt-1 block w-full" id="request_id" name="intent_id"
+                            placeholder="Your name" value="<%= data.intent_id %>" readonly>
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Dealer ID</label>
+                        <input type="email" class="form-input mt-1 block w-full" id="email" name="dealer_id"
+                            placeholder="Your email" value="<%= data.dealer_id %>" readonly>
+                    </div>
+
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700">Farmer ID</label>
+                        <input type="tel" class="form-input mt-1 block w-full" name="farmer_id" id="phone"
+                            placeholder="Your phone number" value="<%= farmer_id %>" readonly>
+                    </div>
+
+                    <div>
+                        <label for="phonee" class="block text-sm font-medium text-gray-700">Amount</label>
+                        <input type="tel" class="form-input mt-1 block w-full" id="phonee" value="<%= data.amount %>"
+                            readonly>
+                    </div>
+
+                    <div>
+                        <label for="phone1" class="block text-sm font-medium text-gray-700">Farmer amount</label>
+                        <input type="tel" class="form-input mt-1 block w-full rounded" id="phone1" value=""
+                            placeholder="1234" name="quantity_offered" required>
+                    </div>
+
+                    <!-- Buttons for approve and reject -->
+                    <div>
+                        <button type="submit" name="action" value="approve"
+                            class="bg-green-500 text-white px-4 py-2 rounded-md mr-2">Request</button>
+
+                    </div>
+
+                </form>
+            </section>
+        </main>
+    </div>
+    <script>
+        document.getElementById('menuButton').addEventListener('click', () => {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+
+</body>
+
+</html>

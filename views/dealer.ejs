@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>dealer page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer="" src="https://unpkg.com/alpinejs@3.2.3/dist/cdn.min.js"></script>
+  <style>
+    .bg-image-container {
+      background-image: url('https://wallpaperaccess.com/full/137520.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="bg-green-900 p-3 w-full">
+    <div class="container mx-auto flex justify-between items-center">
+      <a href="/" class="text-white text-xl font-bold">AgriConnect</a>
+      <div class="lg:hidden">
+        <button id="menuButton" class="text-white focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+      <nav id="navMenu" class="hidden lg:flex space-x-4">
+        <a href="/home"
+          class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Home</a>
+        <a href="/dealerProfileSet?dealer_id=<%= user.id %>"
+          class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">My info</a>
+      </nav>
+    </div>
+  </header>
+
+  <div id="mobileMenu" class="hidden absolute top-16 right-4 bg-green-700 text-white p-4 rounded-md bg-opacity-90 shadow-lg lg:hidden">
+    <nav class="flex flex-col space-y-2">
+      <a href="/home"
+          class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Home</a>
+        <a href="/dealerProfileSet?dealer_id=<%= user.id %>"
+          class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">My info</a>
+    </nav>
+  </div>
+
+  <div class="bg-image-container flex flex-col lg:flex-row justify-between items-center py-6 px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col items-center lg:items-start lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
+      <div class="w-48 h-48 rounded-full shadow-lg bg-white flex items-center justify-center overflow-hidden">
+        <img class="w-full h-full object-fit" src="https://i.pinimg.com/originals/4b/5f/d3/4b5fd341ed56b734a5de24945fcd1c36.jpg" alt="">
+      </div>
+      <div>
+        <h1 class="text-3xl font-sans tracking-tight text-gray-900">
+          <%= user.name %>
+        </h1>
+        <p class="text-lg text-gray-700">
+          <%= role %>
+        </p>
+      </div>
+    </div>
+    <div class="flex space-x-4 mt-4 lg:mt-0">
+      <form id="createOrderForm" action="/createOrder" method="POST">
+        <input type="hidden" name="dealer_id" value="<%= user.id %>">
+        <button type="submit" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md">Create an order</button>
+      </form>
+      <a href="/login" class="flex items-center">
+        <button class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md">Log out</button>
+      </a>
+    </div>
+  </div>
+
+
+  <main class="max-w-7xl mx-auto py-6">
+    <div class="flex flex-col md:flex-row md:space-x-4">
+      <!-- Left Side -->
+      <div class="w-full md:w-1/4 bg-white rounded-lg shadow p-4 mb-4 md:mb-0">
+        <ul class="divide-y divide-gray-200">
+          <li class="py-3">
+            <span class="block text-gray-800 font-medium">
+              Email:
+            </span>
+            <span class="block text-gray-600">
+              <%= user.email %>
+            </span>
+          </li>
+          <li class="py-3">
+            <span class="block text-gray-800 font-medium">
+              Phone:
+            </span>
+            <span class="block text-gray-600">
+              <%= user.phone_number %>
+            </span>
+          </li>
+          <li class="py-3">
+            <span class="block text-gray-800 font-medium">
+              Address:
+            </span>
+            <span class="block text-gray-600">
+              <%= user.address %>
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Right Side -->
+      <div class="w-full md:w-3/4">
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+          <table class="min-w-full divide-y divide-gray-200">
+            <tbody class="bg-white divide-y divide-gray-200">
+              <% intends.forEach(intend => { %>
+                <tr>
+                  <td class="px-4 py-4 text-sm font-medium text-gray-800">
+                    <%= intend.intent_id %>
+                  </td>
+                  <td class="px-4 py-4 text-sm font-medium text-gray-800">
+                    <%= intend.status %>
+                  </td>
+                  <td class="px-4 py-4 text-sm font-medium">
+                    <form action="/confirmIntend" method="POST">
+                      <input type="hidden" name="intent_id" value="<%= intend.intent_id %>">
+                      <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">
+                        Verify
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('menuButton').addEventListener('click', () => {
+      const mobileMenu = document.getElementById('mobileMenu');
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+
+</html>
