@@ -14,11 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Database configuration
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'trail',
-  password: 'sridhar@04',
-  port: 5000,
+  **postgres credentials**
 });
 
 // Session middleware
